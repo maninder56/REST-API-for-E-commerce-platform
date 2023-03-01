@@ -1,0 +1,20 @@
+{
+  "name": "back-end_api_singhm50",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.coventry.ac.uk/6003CEM/back-end_API_singhm50.git"
+  },
+  "author": "maninder",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.14.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^12.0.0"
+  }
+}
