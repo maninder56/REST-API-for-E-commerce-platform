@@ -9,7 +9,7 @@ router.get('/', getAll);
 router.post('/', bodyParser(), createProduct);
 
 router.get('/:id([0-9]{1,})', getById); 
-router.put('/:id([0-9]{1,})', bodyParser, updateProduct); 
+router.put('/:id([0-9]{1,})', bodyParser(), updateProduct); 
 router.del('/:id([0-9]{1,})', deleteProduct);
 
 
@@ -32,16 +32,23 @@ async function getById(ctx, next){
 
 async function createProduct(ctx, next){
     const body = ctx.request.body;
-    let result = await model.add(body);
+    let result = await model.createProduct(body);
     if (result){
         ctx.status = 201;
-        ctx.body = {ID: result.product_id} // this may not work !!!
+        ctx.body = {ID: result.insertId} // return ID of Product 
     }
 }
 
-
-function updateProduct(ctx, next){
-    // 
+// Update Product using product ID 
+async function updateProduct(ctx, next){
+    let id = ctx.params.id;
+    const body = ctx.request.body;
+    console.log("Recieved values:\n",id,"\n",body)
+    let update = await model.updateProduct(id, body);
+    if (update){
+        ctx.status = 201;
+        ctx.body = update
+    }
 }
 
 function deleteProduct(ctx, next){

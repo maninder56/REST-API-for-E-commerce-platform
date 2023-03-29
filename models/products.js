@@ -19,8 +19,17 @@ exports.getAll = async function getAll (page, limit, order){
 
 // create a new product 
 // add product details like name, description, price and product category
-exports.add = async function createProduct(product){
+exports.createProduct = async function createProduct(product){
     let query = "INSERT INTO products SET ?"; 
     let data = await db.run_query(query, product);
     return data;
 }
+
+// Update a product 
+exports.updateProduct = async function updateProduct(id, product){
+    let query = "UPDATE products SET ? WHERE product_id = ?"; 
+    var values = [product, id]
+    let data = await db.run_query(query, values);
+    return data;
+}
+
