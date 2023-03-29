@@ -47,12 +47,19 @@ async function updateProduct(ctx, next){
     let update = await model.updateProduct(id, body);
     if (update){
         ctx.status = 201;
-        ctx.body = update
+        ctx.body = update;
     }
 }
 
-function deleteProduct(ctx, next){
-    //  
+// Delete products by product id 
+async function deleteProduct(ctx, next){
+    let id = ctx.params.id;
+    console.log("Deleted product_id: ",id)
+    let deleteProduct = await model.deleteProduct(id);
+    if (deleteProduct){
+        ctx.status = 202;
+        ctx.body = deleteProduct;
+    }
 }
 
 module.exports = router;

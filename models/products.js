@@ -33,3 +33,11 @@ exports.updateProduct = async function updateProduct(id, product){
     return data;
 }
 
+// Delete a product 
+exports.deleteProduct = async function deleteProduct(id){
+    let query = "DELETE FROM products WHERE product_id = ?"; 
+    var values = [id]
+    let data = await db.run_query(query, values);
+    return data;
+}
+
