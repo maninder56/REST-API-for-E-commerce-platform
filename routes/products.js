@@ -1,55 +1,44 @@
 const Router = require('koa-router');
-
 const bodyParser =require('koa-bodyparser');
+const model = require('../models/products');
 
 const router = Router({prefix: '/api/v1/products'})
 
-let products = [
-    {
-        name:'iphone',
-        discription: 'iOS SmartPhone'
-    },
-
-    {
-        name:'samsung',
-        discription: 'Android SmartPhone'
-    }
-
-    
-]
-
+// All endpoints related to product
 router.get('/', getAll);
-router.post('/', bodyParser(), addProduct);
+router.post('/', bodyParser(), createProduct);
 
 router.get('/:id([0-9]{1,})', getById); 
-router.put('/:id([0-9]{1,})', updateProduct); 
+router.put('/:id([0-9]{1,})', bodyParser, updateProduct); 
 router.del('/:id([0-9]{1,})', deleteProduct);
 
 
 
-function getAll(ctx, next){
-    ctx.body = products; 
-}
-
-function addProduct(ctx, next){
-    let {name, discription} = ctx.request.body;
-    let newProduct = {name:name, discription:discription};
-    products.push(newProduct);
-
-    ctx.status = 201;
-    ctx.body = newProduct;
-}
-
-
-function getById(ctx, next){
-    let id = ctx.params.id;
-    console.log(id);
-    if ((id <= products.length+1) && (id > 0)){
-        ctx.body = products[id-1];
-    } else {
-        ctx.status = 404;
+async function getAll(ctx, next){
+    let products = await model.getAll();
+    if (products.length){
+        ctx.body = products;
     }
 }
+
+async function getById(ctx, next){
+    let id = ctx.params.id;
+    console.log( "Requested product ID: ",id);
+    let product = await model.getByID(id);
+    if (product.length){
+        ctx.body = product[0]
+    }
+}
+
+async function createProduct(ctx, next){
+    const body = ctx.request.body;
+    let result = await model.add(body);
+    if (result){
+        ctx.status = 201;
+        ctx.body = {ID: result.product_id} // this may not work !!!
+    }
+}
+
 
 function updateProduct(ctx, next){
     // 

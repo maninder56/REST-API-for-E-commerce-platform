@@ -11,14 +11,15 @@ exports.getByID = async function getByID (id){
 // List all the products in database
 exports.getAll = async function getAll (page, limit, order){
     // needs to page, limit, order od data 
-    let query = "SELECT * FROM products;";
+    let query = "SELECT * FROM products ";
     let data = await db.run_query(query);
+    console.log(data);
     return data; 
 }
 
 // create a new product 
 // add product details like name, description, price and product category
-exports.add = async function add (product){
+exports.add = async function createProduct(product){
     let query = "INSERT INTO products SET ?"; 
     let data = await db.run_query(query, product);
     return data;
