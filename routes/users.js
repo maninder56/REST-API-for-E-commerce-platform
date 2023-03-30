@@ -14,9 +14,10 @@ router.del('/:id([0-9]{1,})', deleteUser);
 
 // Get all users 
 async function getAll(ctx, next){
-    let products = await model.getAll();
-    if (products.length){
-        ctx.body = products;
+    let users = await model.getAll();
+    console.log("Users requested: ",users)
+    if (users.length){
+        ctx.body = users;
     }
 }
 
@@ -55,7 +56,7 @@ async function updateUser(ctx, next){
 // Delete products by product id 
 async function deleteUser(ctx, next){
     let id = ctx.params.id;
-    console.log("Deleted U=user_id: ",id)
+    console.log("Deleted user_id: ",id)
     let deleteUser = await model.deleteUser(id);
     if (deleteUser){
         ctx.status = 202;

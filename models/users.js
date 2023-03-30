@@ -5,7 +5,6 @@ exports.getAll = async function getAll(page, limit, order){
     // needs to page, limit, order of data 
     let query = "SELECT * FROM users";
     let data = await db.run_query(query);
-    console.log(data);
     return data; 
 }
 
