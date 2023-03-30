@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 const bodyParser =require('koa-bodyparser');
-const model = require('../models/products');
+const model = require('../models/categories');
 
 const router = Router({prefix: '/api/v1/categories'})
 
@@ -36,7 +36,7 @@ async function createCategory(ctx){
     const id = result.insertId
     if (result){
         ctx.status = 201;
-        ctx.body = {ID: id, created: true, link: `${ctx.request.path}/${id}`} 
+        ctx.body = {ID: id, created: true, link: `${ctx.request.path}${id}`} 
     }
 }
 
@@ -48,7 +48,7 @@ async function updateCategory(ctx){
     let update = await model.updateCategory(id, body);
     if (update){
         ctx.status = 201;
-        ctx.body = update;
+        ctx.body = {ID: id, update: true, link: ctx.request.path} ;
     }
 }
 
@@ -59,7 +59,7 @@ async function deleteCategory(ctx, next){
     let deleteCategory = await model.deleteCategory(id);
     if (deleteCategory){
         ctx.status = 202;
-        ctx.body = deleteCategory;
+        ctx.body = {ID: id, deleted: true};
     }
 }
 
