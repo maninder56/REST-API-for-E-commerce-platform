@@ -2,15 +2,22 @@ const Router = require('koa-router');
 
 const bodyParser = require('koa-bodyparser'); 
 
+const auth = require('../controllers/auth');
+
 const router = Router({prefix: '/api/v1'}); 
 
-router.get('/', welcomeAPI); 
+router.get('/', publicAPI);
+router.get('/private', auth, privateAPI);
 
-function welcomeAPI(ctx) { 
-    ctx.body = {
-        message: 'Welcome to the E-commerce API' 
-    } 
-} 
-    
 
-module.exports = router;
+function publicAPI(ctx) {
+    ctx.body = {message: 'PUBLIC PAGE: You requested a new message URI (root) of the API'}
+}
+
+function privateAPI(ctx) {
+    const user = ctx.state.user;
+    ctx.body = {message: `Hello ${user.user_name} you registered on ${user.dateRegistered}`}
+}
+
+module.exports = router
+

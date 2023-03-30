@@ -1,5 +1,5 @@
 const passport = require('koa-passport');
-const basicAuth = require('./strategies/basic');
+const basicAuth = require('../strategies/basic');
 
 passport.use(basicAuth);
 

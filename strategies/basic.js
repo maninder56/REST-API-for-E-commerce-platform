@@ -3,7 +3,7 @@ const users = require('../models/users');
 
 const verifyPassword = function (user, password){
     // compare password 
-    return user.password === password
+    return user.user_password === password
 } 
 
 const checkUserAndPass = async (username, password, done) => {
