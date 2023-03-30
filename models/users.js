@@ -38,3 +38,10 @@ exports.deleteUser = async function deleteUser(id){
     let data = await db.run_query(query, values);
     return data;
 }
+
+// get a single user by (unique) username
+exports.findByUsername = async function getByUsername(username) {
+    const query = "SELECT * FROM users WHERE user_name = ?;";
+    const user = await db.run_query(query, username);
+    return user;
+}
