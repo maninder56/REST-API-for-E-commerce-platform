@@ -36,7 +36,7 @@ async function createCategory(ctx){
     const id = result.insertId
     if (result){
         ctx.status = 201;
-        ctx.body = {ID: id, created: true, link: `${ctx.request.path}${id}`} 
+        ctx.body = {ID: id, created: true, link: `${ctx.request.path}${id}`} ;
     }
 }
 

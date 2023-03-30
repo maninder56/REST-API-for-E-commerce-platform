@@ -13,16 +13,15 @@ router.put('/:id([0-9]{1,})', bodyParser(), updateUser);
 router.del('/:id([0-9]{1,})', deleteUser);
 
 // Get all users 
-async function getAll(ctx, next){
+async function getAll(ctx){
     let users = await model.getAll();
-    console.log("Users requested: ",users)
     if (users.length){
         ctx.body = users;
     }
 }
 
 // Get user by ID 
-async function getById(ctx, next){
+async function getById(ctx){
     let id = ctx.params.id;
     console.log( "Requested User ID: ",id);
     let user = await model.getByID(id);
@@ -32,35 +31,36 @@ async function getById(ctx, next){
 }
 
 // create user 
-async function createUser(ctx, next){
+async function createUser(ctx){
     const body = ctx.request.body;
     let result = await model.createUser(body);
+    const id = result.insertId
     if (result){
         ctx.status = 201;
-        ctx.body = {ID: result.insertId} // return ID of User
+        ctx.body = {ID: id, created: true, link: `${ctx.request.path}${id}`} ;
     }
 }
 
 // Update Product using product ID 
-async function updateUser(ctx, next){
+async function updateUser(ctx){
     let id = ctx.params.id;
     const body = ctx.request.body;
     console.log("Recieved values:\n",id,"\n",body)
     let update = await model.updateUser(id, body);
     if (update){
         ctx.status = 201;
-        ctx.body = update;
+        ctx.body = {ID: id, update: true, link: ctx.request.path} ;
     }
 }
 
 // Delete products by product id 
-async function deleteUser(ctx, next){
+async function deleteUser(ctx){
     let id = ctx.params.id;
     console.log("Deleted user_id: ",id)
     let deleteUser = await model.deleteUser(id);
     if (deleteUser){
         ctx.status = 202;
-        ctx.body = deleteUser;
+        ctx.body = {ID: id, deleted: true};
     }
 }
 
