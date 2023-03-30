@@ -1,5 +1,15 @@
 const db = require('../helpers/database')
 
+
+// List all the products in database
+exports.getAll = async function getAll (page, limit, order){
+    // needs to page, limit, order od data 
+    // SELECT * FROM products order by product_id limit 2; -> Example 
+    let query = "SELECT * FROM products ";
+    let data = await db.run_query(query);
+    return data; 
+}
+
 // get an single product by its ID 
 exports.getByID = async function getByID (id){
     let query = "SELECT * FROM products WHERE product_id = ? ";
@@ -8,14 +18,6 @@ exports.getByID = async function getByID (id){
     return data; 
 }
 
-// List all the products in database
-exports.getAll = async function getAll (page, limit, order){
-    // needs to page, limit, order od data 
-    let query = "SELECT * FROM products ";
-    let data = await db.run_query(query);
-    console.log(data);
-    return data; 
-}
 
 // create a new product 
 // add product details like name, description, price and product category
