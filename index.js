@@ -4,8 +4,8 @@ const app = new Koa();
 
 const special = require('./routes/special.js');
 const products = require('./routes/products.js');
-const users = require('./routes/users');
-const categories = require('./routes/categories')
+const users = require('./routes/users.js');
+const categories = require('./routes/categories.js')
 
 app.use(special.routes());
 app.use(products.routes());

@@ -2,14 +2,16 @@ const Router = require('koa-router');
 const bodyParser =require('koa-bodyparser');
 const model = require('../models/products');
 
+const {validateProduct} = require('../controllers/validation');
+
 const router = Router({prefix: '/api/v1/products'})
 
 // All endpoints related to product
 router.get('/', getAll);
-router.post('/', bodyParser(), createProduct);
+router.post('/', bodyParser(), validateProduct, createProduct);
 
 router.get('/:id([0-9]{1,})', getById); 
-router.put('/:id([0-9]{1,})', bodyParser(), updateProduct); 
+router.put('/:id([0-9]{1,})', bodyParser(), validateProduct, updateProduct); 
 router.del('/:id([0-9]{1,})', deleteProduct);
 
 

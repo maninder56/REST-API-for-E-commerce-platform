@@ -1,10 +1,10 @@
 const {Validator, ValidationError} = require('jsonschema');
 
-const schema = require('../schemas/products.schema');
+const schema = require('../schemas/products.schema.js');
 
 const v = new Validator();
 
-exports.validateArticle = async (ctx, next) => {
+exports.validateProduct = async (ctx, next) => {
     
     const validationOptions = {
         throwError: true,
