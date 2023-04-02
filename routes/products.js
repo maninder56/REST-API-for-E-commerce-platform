@@ -66,4 +66,8 @@ async function deleteProduct(ctx){
     }
 }
 
+// get product by category 
+
+
+
 module.exports = router;

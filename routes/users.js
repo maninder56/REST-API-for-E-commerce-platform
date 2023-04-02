@@ -1,7 +1,8 @@
 const Router = require('koa-router');
 const bodyParser =require('koa-bodyparser');
 const model = require('../models/users');
-const auth = require('../controllers/auth'); // for suthentication 
+const auth = require('../controllers/auth'); // for authentication 
+const can = require('../permissions/users'); // for permissions 
 
 const router = Router({prefix: '/api/v1/users'})
 
@@ -14,6 +15,7 @@ router.put('/:id([0-9]{1,})', bodyParser(), updateUser);
 router.del('/:id([0-9]{1,})', auth ,deleteUser);
 
 // Get all users 
+// add permissions to all routes  <--------
 async function getAll(ctx){
     let users = await model.getAll();
     if (users.length){
