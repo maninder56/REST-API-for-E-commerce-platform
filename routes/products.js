@@ -2,7 +2,8 @@ const Router = require('koa-router');
 const bodyParser =require('koa-bodyparser');
 const model = require('../models/products');
 
-const {validateProduct} = require('../controllers/validation');
+// for data validation 
+const {validateProduct} = require('../controllers/validation'); 
 
 const router = Router({prefix: '/api/v1/products'})
 
