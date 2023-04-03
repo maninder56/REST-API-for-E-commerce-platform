@@ -5,7 +5,8 @@ const model = require('../models/products');
 // for data validation 
 const {validateProduct} = require('../controllers/validation'); 
 
-const router = Router({prefix: '/api/v1/products'})
+const prefix = '/api/v1/products';
+const router = Router({prefix: prefix})
 
 // All endpoints related to product
 router.get('/', getAll);
@@ -19,17 +20,25 @@ router.del('/:id([0-9]{1,})', deleteProduct);
 
 async function getAll(ctx){
     let products = await model.getAll();
-    if (products.length){
-        ctx.body = products;
+    const links = {
+        info : `send GET request for specific product id [1-9]`,
+        byId : `${ctx.protocol}://${ctx.host}${prefix}/id`
     }
-}
+    if (products.length){
+        ctx.body = {links, products};
+    } 
+}        
 
 async function getById(ctx){
     let id = ctx.params.id;
     console.log( "Requested product ID: ",id);
+    const links = {
+        info : `Create new product by POST Request`,
+        createProduct: `${ctx.protocol}://${ctx.host}${prefix}/`
+    }
     let product = await model.getByID(id);
     if (product.length){
-        ctx.body = product[0]
+        ctx.body = { links , product} ; 
     }
 }
 
