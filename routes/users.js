@@ -7,11 +7,11 @@ const can = require('../permissions/users'); // for permissions
 const router = Router({prefix: '/api/v1/users'})
 
 // All endpoints related to product
-router.get('/', getAll);
+router.get('/', getAll); // only admin should be able to access 
 router.post('/', bodyParser(), createUser); // bodyparser is needed to retrieve data from client 
 
-router.get('/:id([0-9]{1,})' ,getById); 
-router.put('/:id([0-9]{1,})', bodyParser(), updateUser); 
+router.get('/:id([0-9]{1,})' , auth, getById); // user can access only their account
+router.put('/:id([0-9]{1,})', auth, bodyParser(), updateUser); // user can only change thier account 
 router.del('/:id([0-9]{1,})', auth ,deleteUser);
 
 // Get all users 
