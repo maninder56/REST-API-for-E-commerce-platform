@@ -24,22 +24,22 @@ exports.getByID = async function getByID (id){
 exports.createOrder = async function createOrder(order){
     // first set the total ammount value to 0 
     // update the total ammount after the orders have been placed in order details
-    let query = "INSERT INTO products SET ?"; 
-    let data = await db.run_query(query, product);
+    let query = "INSERT INTO orders SET ?"; 
+    let data = await db.run_query(query, order);
     return data;
 }
 
 // Update a product 
 exports.updateOrder = async function updateOrder(id, order){
-    let query = "UPDATE products SET ? WHERE product_id = ?"; 
-    var values = [product, id]
+    let query = "UPDATE orders SET ? WHERE order_id = ?"; 
+    var values = [order, id]
     let data = await db.run_query(query, values);
     return data;
 }
 
 // Delete a product 
 exports.deleteOrder = async function deleteOrder(id){
-    let query = "DELETE FROM products WHERE product_id = ?"; 
+    let query = "DELETE FROM orders WHERE order_id = ?"; 
     var values = [id]
     let data = await db.run_query(query, values);
     return data;

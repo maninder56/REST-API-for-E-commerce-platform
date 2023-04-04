@@ -2,6 +2,9 @@ const Router = require('koa-router');
 const bodyParser =require('koa-bodyparser');
 const model = require('../models/products');
 
+// add prefic after products/categorty or /orders 
+// to see how may orders or which category this product fall unders
+
 // for data validation 
 const {validateProduct} = require('../controllers/validation'); 
 
