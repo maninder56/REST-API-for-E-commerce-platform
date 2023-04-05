@@ -1,6 +1,6 @@
 const {Validator, ValidationError} = require('jsonschema');
 
-const schema = require('../schemas/products.schema.js');
+const schema = require('../schemas/products.json');
 
 const v = new Validator();
 

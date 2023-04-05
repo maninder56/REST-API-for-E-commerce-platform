@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: E-commerce API
+  contact: 
+    name: Maninder singh
+    email: singhm50@uni.coventry.ac.uk
+  licence:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'https://clonepupil-ralphdilemma-3000.codio-box.uk/api/v1'
+    description: Development server 
+tags:
+  - name: Users
+    description: API endpoints for user managment.
+  - name: Articles
+    description: Access and perform CRUD operations on blog entries.
+paths:
