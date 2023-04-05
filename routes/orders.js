@@ -88,7 +88,7 @@ async function deleteOrder(ctx){
     console.log("Deleted product_id: ",id)
     const check_id = await model.getByID(id);
     if (check_id.length){
-    let deleteOrder = await model.deleteOrder(id);
+        let deleteOrder = await model.deleteOrder(id);
         if (deleteOrder){
             ctx.status = 202;
             ctx.body = {ID: id, deleted: true};
