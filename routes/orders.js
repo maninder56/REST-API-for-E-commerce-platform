@@ -18,7 +18,6 @@ router.del('/:id([0-9]{1,})', deleteOrder);
 
 
 async function getAll(ctx){
-
     let orders = await model.getAll(); // add permission so that only admin can see all orders 
     const links = {
         info : `send GET request for specific order id [1-9]`,

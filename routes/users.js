@@ -4,7 +4,8 @@ const model = require('../models/users');
 const auth = require('../controllers/auth'); // for authentication 
 const can = require('../permissions/users'); // for permissions 
 
-const router = Router({prefix: '/api/v1/users'})
+const prefix = '/api/v1/users' ; 
+const router = Router({prefix: prefix})
 
 // All endpoints related to product
 router.get('/', getAll); // only admin should be able to access 
@@ -18,8 +19,16 @@ router.del('/:id([0-9]{1,})', auth ,deleteUser);
 // add permissions to all routes  <--------
 async function getAll(ctx){
     let users = await model.getAll();
+    const links = {
+        info : `send GET request for specific user id [1-9]`,
+        byId : `${ctx.protocol}://${ctx.host}${prefix}/id`
+    }
     if (users.length){
-        ctx.body = users;
+        ctx.status = 200;
+        ctx.body = {links, users};
+    } else{
+        ctx.body = `unauthorised`
+        ctx.status = 400;
     }
 }
 
@@ -27,9 +36,18 @@ async function getAll(ctx){
 async function getById(ctx){
     let id = ctx.params.id;
     console.log( "Requested User ID: ",id);
+    const links = {
+        info : `Create new user by POST Request`,
+        createOrder: `${ctx.protocol}://${ctx.host}${prefix}/`
+    }
     let user = await model.getByID(id);
     if (user.length){
-        ctx.body = user[0]
+        user = user[0]
+        ctx.status = 200;
+        ctx.body = { links , user} ; 
+    } else {
+        ctx.body = `Not Valid ID`
+        ctx.status = 400;
     }
 }
 
@@ -41,6 +59,9 @@ async function createUser(ctx){
     if (result){
         ctx.status = 201;
         ctx.body = {ID: id, created: true, link: `${ctx.request.path}${id}`} ;
+    } else {
+        ctx.body = `unable to create user`
+        ctx.status = 400;
     }
 }
 
@@ -48,23 +69,40 @@ async function createUser(ctx){
 async function updateUser(ctx){
     let id = ctx.params.id;
     const body = ctx.request.body;
-    console.log("Recieved values:\n",id,"\n",body)
-    let update = await model.updateUser(id, body);
-    if (update){
-        ctx.status = 201;
-        ctx.body = {ID: id, update: true, link: ctx.request.path} ;
+    const check_id = await model.getByID(id);
+    if (check_id.length){
+        console.log("Recieved values:\n",id,"\n",body)
+        let update = await model.updateUser(id, body);
+        if (update){
+            ctx.status = 201;
+            ctx.body = {ID: id, update: true, link: ctx.request.path} ;
+        }else{
+            ctx.body = `user not found. make sure user id is correct`
+            ctx.status = 404;
+        }
     }
+    
 }
 
 // Delete products by product id 
 async function deleteUser(ctx){
     let id = ctx.params.id;
     console.log("Deleted user_id: ",id)
-    let deleteUser = await model.deleteUser(id);
-    if (deleteUser){
-        ctx.status = 202;
-        ctx.body = {ID: id, deleted: true};
+    const check_id = await model.getByID(id);
+    if (check_id.length){
+        let deleteUser = await model.deleteUser(id);
+        if (deleteUser){
+            ctx.status = 202;
+            ctx.body = {ID: id, deleted: true};
+        } else{
+            ctx.body = `unauthorized`
+            ctx.status = 403;
+        }
+    } else {
+        ctx.body = `order not found. make sure order id is correct`
+        ctx.status = 404;
     }
+    
 }
 
 module.exports = router;

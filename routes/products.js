@@ -28,8 +28,12 @@ async function getAll(ctx){
         byId : `${ctx.protocol}://${ctx.host}${prefix}/id`
     }
     if (products.length){
+        ctx.status = 200;
         ctx.body = {links, products};
-    } 
+    } else{
+        ctx.body = `unauthorised`
+        ctx.status = 400;
+    }
 }        
 
 async function getById(ctx){
@@ -41,7 +45,11 @@ async function getById(ctx){
     }
     let product = await model.getByID(id);
     if (product.length){
+        ctx.status = 200;
         ctx.body = { links , product} ; 
+    }else {
+        ctx.body = `Not Valid ID`
+        ctx.status = 400;
     }
 }
 
@@ -52,6 +60,9 @@ async function createProduct(ctx){
     if (result){
         ctx.status = 201;
         ctx.body = {ID: id, created: true, link: `${ctx.request.path}${id}`} 
+    }else {
+        ctx.body = `unable to create product`
+        ctx.status = 400;
     }
 }
 
@@ -59,23 +70,40 @@ async function createProduct(ctx){
 async function updateProduct(ctx){
     let id = ctx.params.id;
     const body = ctx.request.body;
-    console.log("Recieved values:\n",id,"\n",body)
-    let update = await model.updateProduct(id, body);
-    if (update){
-        ctx.status = 201;
-        ctx.body = {ID: id, update: true, link: ctx.request.path};
+    const check_id = await model.getByID(id);
+    if (check_id.length){
+        console.log("Recieved values:\n",id,"\n",body)
+        let update = await model.updateProduct(id, body);
+        if (update){
+            ctx.status = 201;
+            ctx.body = {ID: id, update: true, link: ctx.request.path};
+        }
+    } else{
+        ctx.body = `product not found. make sure product id is correct`
+        ctx.status = 404;
     }
+    
 }
 
 // Delete products by product id 
 async function deleteProduct(ctx){
     let id = ctx.params.id;
     console.log("Deleted product_id: ",id)
-    let deleteProduct = await model.deleteProduct(id);
-    if (deleteProduct){
-        ctx.status = 202;
-        ctx.body = {ID: id, deleted: true};
+    const check_id = await model.getByID(id);
+    if (check_id.length){
+        let deleteProduct = await model.deleteProduct(id);
+        if (deleteProduct){
+            ctx.status = 202;
+            ctx.body = {ID: id, deleted: true};
+        } else{
+            ctx.body = `unauthorized`
+            ctx.status = 403;
+        } 
+    }else {
+        ctx.body = `product not found. make sure product id is correct`
+        ctx.status = 404;
     }
+    
 }
 
 // get product by category 
