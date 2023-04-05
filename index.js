@@ -7,12 +7,14 @@ const products = require('./routes/products.js');
 const users = require('./routes/users.js');
 const categories = require('./routes/categories.js')
 const orders = require('./routes/orders.js');
+const orderdetail = require('./routes/orderDetails.js')
 
 app.use(special.routes());
 app.use(products.routes());
 app.use(users.routes());
 app.use(categories.routes())
 app.use(orders.routes());
+app.use(orderdetail.routes())
 
 let port = process.env.PORT || 3000
 app.listen(port);
