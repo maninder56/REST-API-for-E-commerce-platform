@@ -13,7 +13,7 @@ const router = Router({prefix: prefix})
 
 // All endpoints related to product
 router.get('/', getAll);
-router.post('/', bodyParser(), validateProduct, createProduct);
+router.post('/', bodyParser(), validateProduct, createProduct); // add permissions here 
 
 router.get('/:id([0-9]{1,})', getById); 
 router.put('/:id([0-9]{1,})', bodyParser(), validateProduct, updateProduct); 

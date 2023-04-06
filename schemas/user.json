@@ -82,6 +82,70 @@
                     "type":"object"
                 }
             }
+        },
+
+        "userlogin":{
+            "$id": "#GetUser",
+            "title": "GetUser",
+            "description": "Confirmation of a successful Get request",
+            "type": "object",
+            "properties": {
+                "username":{
+                    "description": "user name",
+                    "type":"string"
+                },
+
+                "password":{
+                    "description": "user password",
+                    "type" :"string"
+                }
+            }
+        },
+
+        "GetByIdResponse":{
+            "$id": "#GetUser",
+            "title": "GetUser",
+            "description": "Confirmation of a successful Get request",
+            "type": "object",
+            "properties": {
+                "user_name":{
+                    "description":"unique user name require",
+                    "type":"string"
+                },
+            
+                "user_firstname":{
+                    "description":"first name of user",
+                    "type":"string"
+                },
+
+                "user_lastname":{
+                    "description":"last name of user",
+                    "type":"string"
+                },
+
+                "user_email":{
+                    "description":"user email",
+                    "type":"string"
+                }
+            }
+        },
+
+        "deleteResponse":{
+            "$id": "#DeleteUser",
+            "title": "DeleteUser",
+            "description": "Confirmation of a successful Delete request",
+            "type": "object",
+            "properties": {
+                "id" :{
+                    "description": "user id",
+                    "type":"integer"
+                },
+                "deleted":{
+                    "description": "Boolean indicator of success",
+                    "type":"boolean"
+                }
+            }
         }
+        
     }
   }

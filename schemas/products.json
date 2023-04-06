@@ -1,30 +1,121 @@
 {
     "$schema":"http://json-schema.org/draft-04/schema#",
-    "id":"https://clonepupil-ralphdilemma-3000.codio-box.uk/api/v1/products",
-    "title":"Product",
-    "description":"An product in inventory",
-    "type":"object",
-    "properties":{
-      "product_name":{
-        "description":"Name of the product",
-        "type":"string"
+    "definitions": {
+      "product":{
+          "id":"https://clonepupil-ralphdilemma-3000.codio-box.uk/api/v1/products",
+          "title":"Product",
+          "description":"An product in inventory",
+          "type":"object",
+          "properties":{
+            "product_name":{
+              "description":"Name of the product",
+              "type":"string"
+            },
+
+            "product_description":{
+              "description":"information about the product",
+              "type":"string"
+            },
+
+            "price":{
+              "description":"price of the product",
+              "type":"integer"
+            },
+
+            "category_id":{
+              "description":"Category of the product",
+              "type":"integer"
+            }
+          },
+          "required":["product_name","price","category_id"]
+        },
+
+        "ProductCreated":{
+          "$id": "#ProductCreated",
+          "title": "ProductCreated",
+          "description": "Confirmation of a successful Product update/creation",
+          "type": "object",
+          "properties": {
+              "ID": {
+                  "description": "ID of the new/updated Product record",
+                  "type": "integer"
+              },
+              "updated": {
+                  "description": "Boolean indicator of success",
+                  "type": "boolean"
+              },
+              "link": {
+                  "description": "Path to retrieve Product record",
+                  "type": "string",
+                  "format": "uri"
+              }
+          }
       },
-      "product_description":{
-        "description":"information about the product",
-        "type":"string"
+
+      "GetAllProduct":{
+          "$id": "#GetAllProduct",
+          "title": "GetAllProduct",
+          "description": "Confirmation of a successful Get request",
+          "type": "object",
+          "properties": {
+              "link": {
+                  "description": "Path to retrieve product record",
+                  "type": "string",
+                  "format": "uri"
+              },
+
+              "ProductList":{
+                  "description": "show all the Products in database",
+                  "type":"object"
+              }
+          }
       },
-      "price":{
-        "description":"price of the product",
-        "type":"integer"
+
+
+      "GetByIdResponse":{
+          "$id": "#GetProduct",
+          "title": "GetProduct",
+          "description": "Confirmation of a successful Get request",
+          "type": "object",
+          "properties": {
+              "Product_name":{
+                  "description":"unique Product name require",
+                  "type":"string"
+              },
+          
+              "Product_firstname":{
+                  "description":"first name of Product",
+                  "type":"string"
+              },
+
+              "Product_lastname":{
+                  "description":"last name of Product",
+                  "type":"string"
+              },
+
+              "Product_email":{
+                  "description":"Product email",
+                  "type":"string"
+              }
+          }
       },
-      "category_id":{
-        "description":"Category of the product",
-        "type":"integer"
+
+      "deleteResponse":{
+          "$id": "#DeleteProduct",
+          "title": "DeleteProduct",
+          "description": "Confirmation of a successful Delete request",
+          "type": "object",
+          "properties": {
+              "id" :{
+                  "description": "Product id",
+                  "type":"integer"
+              },
+              "deleted":{
+                  "description": "Boolean indicator of success",
+                  "type":"boolean"
+              }
+          }
       }
-    },
-    "required":[
-      "product_name",
-      "price",
-      "category_id"
-    ]
+    }
+
   }

@@ -8,7 +8,7 @@
 
 const {Validator, ValidationError} = require('jsonschema');
 
-const schema = require('../schemas/products.json');
+const schema = require('../schemas/products.json').definitions.product;
 
 const userSchema = require('../schemas/user.json').definitions.user;
 

@@ -31,37 +31,67 @@ paths:
         - Users
       description:
         Get user by ID.
+      requestBody:
+          description: user login details
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/userlogin
       responses:
         '200':
           description: View of a user's record, excluding password.
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/GetByIdResponse
         '401':
           description: Non-admin users can only view their own record.
         '404':
           description: User was not found in the DB.
+
     put:
       tags:
         - Users
       description:
         Update user by ID.
-      delete:
-        tags:
-          - Users
-        description:
-          Delete user by ID.
-        responses:
+      requestBody:
+          description: user login details
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/userlogin
+      responses:
         '200':
           description: Update confirmation and link to record.
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/GetByIdResponse
         '404':
           description: User was not found in the DB.
+
     
     delete:
       tags:
         - Users
       description:
         Delete user by ID.
+      requestBody:
+          description: user login details
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/userlogin
       responses:
         '200':
           description: Delete confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/deleteResponse
         '401':
           description: Only admin users can delete user accounts.
         '404':
@@ -105,6 +135,125 @@ paths:
               application/json:
                 schema:
                   $ref: ./user.json#/definitions/GetAllUsers
+          '404':
+            description: unauthorised
+
+
+
+
+
+
+
+
+  /Products/{id}:
+    parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric id of the product
+    get:
+      tags:
+        - Products 
+      description:
+        Get Product by ID.
+      responses:
+        '200':
+          description: View of a Product's record.
+          content:
+            application/json:
+              schema:
+                $ref: ./products.json#/definitions/GetByIdResponse
+        
+        '404':
+          description: Product was not found in the DB.
+
+    put:
+      tags:
+        - Products 
+      description:
+        Update product by ID.
+      requestBody:
+          description: user login details
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/userlogin
+      responses:
+        '200':
+          description: Update confirmation and link to record.
+          content:
+            application/json:
+              schema:
+                $ref: ./products.json#/definitions/GetByIdResponse
+        '404':
+          description: User was not found in the DB.
+
+    
+    delete:
+      tags:
+        - Products 
+      description:
+        Delete Product by ID.
+      requestBody:
+          description: user login details
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/userlogin
+      responses:
+        '200':
+          description: Delete confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: ./products.json#/definitions/deleteResponse
+        '401':
+          description: Only admin users can delete Product.
+        '404':
+          description: Product was not found in the DB.
+
+
+  /Products:
+      summary: Represents an individual Product
+      description: >
+        This resource represents an product in the system.
+        Each user is identified by a numeric `id`.
+      post:
+        tags:
+          - Products 
+        description:
+          Create a new Product.
+        requestBody:
+          description: new Products data.
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./products.json#/definitions/product
+        responses:
+          '201':
+            description: Product created
+            content:
+              application/json:
+                schema:
+                  $ref: ./products.json#/definitions/ProductCreated
+      
+      get:
+        tags:
+          - Products 
+        description:
+          get all Products.
+        responses:
+          '200':
+            description: show all the Product
+            content:
+              application/json:
+                schema:
+                  $ref: ./products.json#/definitions/GetAllProduct
           '404':
             description: unauthorised
 

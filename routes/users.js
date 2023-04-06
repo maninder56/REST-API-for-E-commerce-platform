@@ -52,7 +52,7 @@ async function getById(ctx){
         ctx.body = { links , user} ; 
     } else {
         ctx.body = `Not Valid ID`
-        ctx.status = 400;
+        ctx.status = 404;
     }
 }
 
