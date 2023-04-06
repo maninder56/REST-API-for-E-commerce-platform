@@ -17,6 +17,10 @@ tags:
     description: API endpoints for user managment.
   - name: Products 
     description: Access and perform CRUD operations on products entries.
+  - name: categories
+    description: Access and perform CRUD operations on Category entries.
+
+  
 paths:
   /users/{id}:
     parameters:
@@ -254,6 +258,129 @@ paths:
               application/json:
                 schema:
                   $ref: ./products.json#/definitions/GetAllProduct
+          '404':
+            description: unauthorised
+
+
+
+
+
+
+
+
+
+
+
+
+  /categories/{id}:
+    parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric id of the category
+    get:
+      tags:
+        - categories 
+      description:
+        Get category by ID.
+      responses:
+        '200':
+          description: View of a category's record.
+          content:
+            application/json:
+              schema:
+                $ref: ./category.json#/definitions/GetByIdResponse
+        
+        '404':
+          description: category was not found in the DB.
+
+    put:
+      tags:
+        - categories 
+      description:
+        Update category by ID.
+      requestBody:
+          description: user login details
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/userlogin
+      responses:
+        '200':
+          description: Update confirmation and link to record.
+          content:
+            application/json:
+              schema:
+                $ref: ./category.json#/definitions/GetByIdResponse
+        '404':
+          description: category was not found in the DB.
+
+    
+    delete:
+      tags:
+        - categories
+      description:
+        Delete category by ID.
+      requestBody:
+          description: user login details
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/userlogin
+      responses:
+        '200':
+          description: Delete confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: ./category.json#/definitions/deleteResponse
+        '401':
+          description: Only admin users can delete category.
+        '404':
+          description: category was not found in the DB.
+
+
+  /categories:
+      summary: Represents an individual category
+      description: >
+        This resource represents an category in the system.
+        Each user is identified by a numeric `id`.
+      post:
+        tags:
+          - categories
+        description:
+          Create a new category
+        requestBody:
+          description: new category data.
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./category.json#/definitions/category
+        responses:
+          '201':
+            description: category created
+            content:
+              application/json:
+                schema:
+                  $ref: ./category.json#/definitions/categoryCreated
+      
+      get:
+        tags:
+          - categories 
+        description:
+          get all categories
+        responses:
+          '200':
+            description: show all the categories
+            content:
+              application/json:
+                schema:
+                  $ref: ./category.json#/definitions/GetAllcategory
           '404':
             description: unauthorised
 

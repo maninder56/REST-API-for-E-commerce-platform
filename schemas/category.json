@@ -68,24 +68,14 @@
           "description": "Confirmation of a successful Get request",
           "type": "object",
           "properties": {
-              "category_name":{
-                  "description":"unique category name require",
-                  "type":"string"
+            "category_name":{
+                "description":"Name of the category",
+                "type":"string"
               },
-          
-              "category_firstname":{
-                  "description":"first name of category",
-                  "type":"string"
-              },
-
-              "category_lastname":{
-                  "description":"last name of category",
-                  "type":"string"
-              },
-
-              "category_email":{
-                  "description":"category email",
-                  "type":"string"
+  
+              "category_description":{
+                "description":"information about the category",
+                "type":"string"
               }
           }
       },
