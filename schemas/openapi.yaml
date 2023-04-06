@@ -78,6 +78,19 @@ paths:
           - Users
         description:
           Create a new user account.
+        requestBody:
+          description: All new user data.
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/user
         responses:
           '201':
             description: User created
+            content:
+              application/json:
+                schema:
+                  $ref: ./user.json#/definitions/userCreated
+
+                  
