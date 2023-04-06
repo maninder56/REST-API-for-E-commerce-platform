@@ -1,0 +1,111 @@
+{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "definitions": {
+      "category":{
+          "id":"https://clonepupil-ralphdilemma-3000.codio-box.uk/api/v1/categories",
+          "title":"category",
+          "description":"An category in inventory",
+          "type":"object",
+          "properties":{
+            "category_name":{
+              "description":"Name of the category",
+              "type":"string"
+            },
+
+            "category_description":{
+              "description":"information about the category",
+              "type":"string"
+            }
+          },
+          "required":["category_name"]
+        },
+
+        "categoryCreated":{
+          "$id": "#categoryCreated",
+          "title": "categoryCreated",
+          "description": "Confirmation of a successful category update/creation",
+          "type": "object",
+          "properties": {
+              "ID": {
+                  "description": "ID of the new/updated category record",
+                  "type": "integer"
+              },
+              "updated": {
+                  "description": "Boolean indicator of success",
+                  "type": "boolean"
+              },
+              "link": {
+                  "description": "Path to retrieve category record",
+                  "type": "string",
+                  "format": "uri"
+              }
+          }
+      },
+
+      "GetAllcategory":{
+          "$id": "#GetAllcategory",
+          "title": "GetAllcategory",
+          "description": "Confirmation of a successful Get request",
+          "type": "object",
+          "properties": {
+              "link": {
+                  "description": "Path to retrieve category record",
+                  "type": "string",
+                  "format": "uri"
+              },
+
+              "categoryList":{
+                  "description": "show all the categorys in database",
+                  "type":"object"
+              }
+          }
+      },
+
+
+      "GetByIdResponse":{
+          "$id": "#Getcategory",
+          "title": "Getcategory",
+          "description": "Confirmation of a successful Get request",
+          "type": "object",
+          "properties": {
+              "category_name":{
+                  "description":"unique category name require",
+                  "type":"string"
+              },
+          
+              "category_firstname":{
+                  "description":"first name of category",
+                  "type":"string"
+              },
+
+              "category_lastname":{
+                  "description":"last name of category",
+                  "type":"string"
+              },
+
+              "category_email":{
+                  "description":"category email",
+                  "type":"string"
+              }
+          }
+      },
+
+      "deleteResponse":{
+          "$id": "#Deletecategory",
+          "title": "Deletecategory",
+          "description": "Confirmation of a successful Delete request",
+          "type": "object",
+          "properties": {
+              "id" :{
+                  "description": "category id",
+                  "type":"integer"
+              },
+              "deleted":{
+                  "description": "Boolean indicator of success",
+                  "type":"boolean"
+              }
+          }
+      }
+    }
+
+  }

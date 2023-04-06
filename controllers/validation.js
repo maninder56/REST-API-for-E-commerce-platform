@@ -12,8 +12,10 @@ const schema = require('../schemas/products.json').definitions.product;
 
 const userSchema = require('../schemas/user.json').definitions.user;
 
+const categorySchema = require('../schemas/category.json').definitions.category;
 
 const v = new Validator();
+
 
 exports.validateProduct = async (ctx, next) => {
     
@@ -48,6 +50,28 @@ exports.validateUser = async (ctx, next) => {
     
     try {
         v.validate(body, userSchema, validationOptions);
+        await next();
+    } catch (error) {
+        if (error instanceof ValidationError) {
+            ctx.body = error;
+            ctx.status = 400;
+        } else {
+            throw error;
+        }
+    }
+}
+
+exports.validateCategory = async (ctx, next) => {
+    
+    const validationOptions = {
+        throwError: true,
+        allowUnknownAttributes: false
+    };
+    
+    const body = ctx.request.body;
+    
+    try {
+        v.validate(body, categorySchema, validationOptions);
         await next();
     } catch (error) {
         if (error instanceof ValidationError) {
