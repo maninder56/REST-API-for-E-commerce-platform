@@ -6,7 +6,7 @@ const can = require('../permissions/users'); // for permissions
 
 
 // for data validation 
-const {validateUser} = require('../controllers/user_validation'); 
+const {validateUser} = require('../controllers/validation'); 
 
 
 const prefix = '/api/v1/users' ; 
