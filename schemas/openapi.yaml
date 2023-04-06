@@ -30,7 +30,7 @@ paths:
       tags:
         - Users
       description:
-        Get user by id.
+        Get user by ID.
       responses:
         '200':
           description: View of a user's record, excluding password.
@@ -92,5 +92,20 @@ paths:
               application/json:
                 schema:
                   $ref: ./user.json#/definitions/userCreated
+      
+      get:
+        tags:
+          - Users
+        description:
+          get all user account.
+        responses:
+          '200':
+            description: show all the users
+            content:
+              application/json:
+                schema:
+                  $ref: ./user.json#/definitions/GetAllUsers
+          '404':
+            description: unauthorised
 
                   

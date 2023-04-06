@@ -63,6 +63,25 @@
                     "format": "uri"
                 }
             }
+        },
+
+        "GetAllUsers":{
+            "$id": "#GetAllUsers",
+            "title": "GetAllUsers",
+            "description": "Confirmation of a successful Get request",
+            "type": "object",
+            "properties": {
+                "link": {
+                    "description": "Path to retrieve user record",
+                    "type": "string",
+                    "format": "uri"
+                },
+
+                "UsersList":{
+                    "description": "show all the users in database",
+                    "type":"object"
+                }
+            }
         }
     }
   }
