@@ -73,24 +73,19 @@
           "description": "Confirmation of a successful Get request",
           "type": "object",
           "properties": {
-              "orders_name":{
-                  "description":"unique orders name require",
-                  "type":"string"
+            "user_id":{
+                "description":"user Id",
+                "type":"integer"
               },
-          
-              "orders_firstname":{
-                  "description":"first name of orders",
-                  "type":"string"
+  
+              "total_amount":{
+                "description":"total ammount of the order",
+                "type":"integer"
               },
-
-              "orders_lastname":{
-                  "description":"last name of orders",
-                  "type":"string"
-              },
-
-              "orders_email":{
-                  "description":"orders email",
-                  "type":"string"
+  
+              "order_date":{
+                "description":"Date of the order",
+                "type":"string"
               }
           }
       },

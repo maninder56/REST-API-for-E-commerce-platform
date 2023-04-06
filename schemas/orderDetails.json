@@ -1,0 +1,121 @@
+{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "definitions": {
+      "orderdetails":{
+          "id":"https://clonepupil-ralphdilemma-3000.codio-box.uk/api/v1/ordersdetails",
+          "title":"orderdetails",
+          "description":"An orderdetails in inventory",
+          "type":"object",
+          "properties":{
+            "order_id":{
+              "description":"order id",
+              "type":"integer"
+            },
+
+            "product_id":{
+              "description":"product_id",
+              "type":"integer"
+            },
+
+            "total_price":{
+              "description":"total price of the orderdetails",
+              "type":"integer"
+            },
+
+            "quantity":{
+              "description":"quantity of item",
+              "type":"integer"
+            }
+          },
+          "required":["order_id", "product_id"]
+        },
+
+        "orderdetailsCreated":{
+          "$id": "#orderdetailsCreated",
+          "title": "orderdetailsCreated",
+          "description": "Confirmation of a successful orderdetails update/creation",
+          "type": "object",
+          "properties": {
+              "ID": {
+                  "description": "ID of the new/updated orderdetails record",
+                  "type": "integer"
+              },
+              "updated": {
+                  "description": "Boolean indicator of success",
+                  "type": "boolean"
+              },
+              "link": {
+                  "description": "Path to retrieve orderdetails record",
+                  "type": "string",
+                  "format": "uri"
+              }
+          }
+      },
+
+      "GetAllorderdetails":{
+          "$id": "#GetAllorderdetails",
+          "title": "GetAllorderdetails",
+          "description": "Confirmation of a successful Get request",
+          "type": "object",
+          "properties": {
+              "link": {
+                  "description": "Path to retrieve orderdetails record",
+                  "type": "string",
+                  "format": "uri"
+              },
+
+              "orderdetailsList":{
+                  "description": "show all the orderdetails in database",
+                  "type":"object"
+              }
+          }
+      },
+
+
+      "GetByIdResponse":{
+          "$id": "#Getorderdetails",
+          "title": "Getorderdetails",
+          "description": "Confirmation of a successful Get request",
+          "type": "object",
+          "properties": {
+            "order_id":{
+                "description":"order id",
+                "type":"integer"
+              },
+  
+              "product_id":{
+                "description":"product_id",
+                "type":"integer"
+              },
+  
+              "total_price":{
+                "description":"total price of the orderdetails",
+                "type":"integer"
+              },
+  
+              "quantity":{
+                "description":"quantity of item",
+                "type":"integer"
+              }
+          }
+      },
+
+      "deleteResponse":{
+          "$id": "#Deleteorderdetails",
+          "title": "Deleteorderdetails",
+          "description": "Confirmation of a successful Delete request",
+          "type": "object",
+          "properties": {
+              "id" :{
+                  "description": "orderdetails id",
+                  "type":"integer"
+              },
+              "deleted":{
+                  "description": "Boolean indicator of success",
+                  "type":"boolean"
+              }
+          }
+      }
+    }
+
+  }
