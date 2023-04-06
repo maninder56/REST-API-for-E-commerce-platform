@@ -1,0 +1,47 @@
+{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "id":"https://clonepupil-ralphdilemma-3000.codio-box.uk/api/v1/users",
+    "title":"user",
+    "description":"users in database",
+    "type":"object",
+    "properties":{
+
+      "user_name":{
+        "description":"unique user name require",
+        "type":"string"
+      },
+
+      "user_firstname":{
+        "description":"first name of user",
+        "type":"string"
+      },
+
+      "user_lastname":{
+        "description":"last name of user",
+        "type":"string"
+      },
+
+      "user_email":{
+        "description":"user email",
+        "type":"string"
+      },
+
+      "user_password":{
+        "description":"set user password",
+        "type":"string"
+      },
+
+      "dateRegistered":{
+        "description":"a date when user registered",
+        "type":"string",
+        "format": "date"
+      }
+
+
+    },
+
+    "required":[
+      "user_name",
+      "user_password"
+    ]
+  }
