@@ -7,7 +7,7 @@ ac.grant('user').condition(
         args: {
             'requester':'$.owner'
         }
-    }).execute('read').on('user', ['*', '!password', '!passwordSalt']); // change variable to bd names 
+    }).execute('read').on('user', ['*', '!user_password']); // change variable to bd names 
 
 
 ac.grant('user').condition(
@@ -16,7 +16,7 @@ ac.grant('user').condition(
         args: {
             'requester':'$.owner'
         }
-    }).execute('update').on('user', ['firstName', 'lastName', 'about', 'password', 'email',]);
+    }).execute('update').on('user', ['user_firstname', 'user_lastname', 'user_email', 'user_password']);
 
 
 // admin permisions 

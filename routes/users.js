@@ -21,20 +21,23 @@ router.put('/:id([0-9]{1,})', auth,  bodyParser(), validateUser, updateUser); //
 router.del('/:id([0-9]{1,})', auth ,deleteUser);
 
 // Get all users 
-// add permissions to all routes  <--------
 async function getAll(ctx){
-    let users = await model.getAll();
+    
     const links = {
         info : `send GET request for specific user id [1-9]`,
         byId : `${ctx.protocol}://${ctx.host}${prefix}/id`
     }
-    if (users.length){
-        ctx.status = 200;
-        ctx.body = {links, users};
-    } else{
+    const permission = can.readAll(ctx.state.user);
+    if (!permission.granted){
         ctx.body = `unauthorised`
-        ctx.status = 400;
-    }
+        ctx.status = 403;
+    } else{
+        let result = await model.getAll();
+        if (result.length){
+            ctx.status = 200;
+            ctx.body = {links, result};
+        }
+    } 
 }
 
 // Get user by ID 

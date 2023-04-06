@@ -53,7 +53,7 @@ paths:
             application/json:
               schema:
                 $ref: ./user.json#/definitions/GetByIdResponse
-        '401':
+        '403':
           description: Non-admin users can only view their own record.
         '404':
           description: User was not found in the DB.
