@@ -4,15 +4,20 @@ const model = require('../models/users');
 const auth = require('../controllers/auth'); // for authentication 
 const can = require('../permissions/users'); // for permissions 
 
+
+// for data validation 
+const {validateUser} = require('../controllers/user_validation'); 
+
+
 const prefix = '/api/v1/users' ; 
 const router = Router({prefix: prefix})
 
 // All endpoints related to product
 router.get('/', getAll); // only admin should be able to access 
-router.post('/', bodyParser(), createUser); // bodyparser is needed to retrieve data from client 
+router.post('/', bodyParser(), validateUser,  createUser); // bodyparser is needed to retrieve data from client 
 
 router.get('/:id([0-9]{1,})' , auth, getById); // user can access only their account
-router.put('/:id([0-9]{1,})', auth, bodyParser(), updateUser); // user can only change thier account 
+router.put('/:id([0-9]{1,})', auth, validateUser, bodyParser(), updateUser); // user can only change thier account 
 router.del('/:id([0-9]{1,})', auth ,deleteUser);
 
 // Get all users 
