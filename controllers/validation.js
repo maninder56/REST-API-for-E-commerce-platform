@@ -16,7 +16,7 @@ const categorySchema = require('../schemas/category.json').definitions.category;
 
 const orderSchema = require('../schemas/orders.json').definitions.orders;
 
-const orderdetailSchema = require('../schemas/orderDetails.json').definitions.orderdetails;
+const orderdetailSchema = require('../schemas/ordersdetails.json').definitions.orderdetails;
 
 const v = new Validator();
 

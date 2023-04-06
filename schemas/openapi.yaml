@@ -21,6 +21,8 @@ tags:
     description: Access and perform CRUD operations on Category entries.
   - name: orders
     description: Access and perform CRUD operations on orders entries.
+  - name: ordersdetails
+    description: Access and perform CRUD operations on ordersdetails entries.
 
   
 paths:
@@ -514,5 +516,130 @@ paths:
                   $ref: ./orders.json#/definitions/GetAllorders
           '404':
             description: unauthorised
+
+
+
+
+
+
+
+
+
+
+
+  /ordersdetails/{id}:
+    parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric id of the ordersdetail
+    get:
+      tags:
+        - ordersdetails 
+      description:
+        Get ordersdetails by ID.
+      responses:
+        '200':
+          description: View of a ordersdetails's record.
+          content:
+            application/json:
+              schema:
+                $ref: ./ordersdetails.json#/definitions/GetByIdResponse
+        
+        '404':
+          description: ordersdetail was not found in the DB.
+
+    put:
+      tags:
+        - ordersdetails 
+      description:
+        Update ordersdetail by ID.
+      requestBody:
+          description: user login details
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/userlogin
+      responses:
+        '200':
+          description: Update confirmation and link to record.
+          content:
+            application/json:
+              schema:
+                $ref: ./ordersdetails.json#/definitions/GetByIdResponse
+        '404':
+          description: User was not found in the DB.
+
+    
+    delete:
+      tags:
+        - ordersdetails
+      description:
+        Delete ordersdetail by ID.
+      requestBody:
+          description: user login details
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./user.json#/definitions/userlogin
+      responses:
+        '200':
+          description: Delete confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: ./ordersdetails.json#/definitions/deleteResponse
+        '401':
+          description: Only admin users can delete ordersdetail.
+        '404':
+          description: ordersdetail was not found in the DB.
+
+
+  /ordersdetails:
+      summary: Represents an individual ordersdetail
+      description: >
+        This resource represents an ordersdetails in the system.
+        Each user is identified by a numeric `id`.
+      post:
+        tags:
+          - ordersdetails 
+        description:
+          Create a new ordersdetail.
+        requestBody:
+          description: new ordersdetails data.
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: ./ordersdetails.json#/definitions/orderdetails
+        responses:
+          '201':
+            description: ordersdetail created
+            content:
+              application/json:
+                schema:
+                  $ref: ./ordersdetails.json#/definitions/orderdetailsCreated
+          '400':
+            description: ordersdetail not created.
+      
+      get:
+        tags:
+          - ordersdetails 
+        description:
+          get all ordersdetailss.
+        responses:
+          '200':
+            description: show all the ordersdetails
+            content:
+              application/json:
+                schema:
+                  $ref: ./ordersdetails.json#/definitions/GetAllorderdetails
+          '404':
+            description: unauthorised
+
 
 
