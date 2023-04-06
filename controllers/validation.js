@@ -14,8 +14,9 @@ const userSchema = require('../schemas/user.json').definitions.user;
 
 const categorySchema = require('../schemas/category.json').definitions.category;
 
-const v = new Validator();
+const orderSchema = require('../schemas/orders.json').definitions.orders;
 
+const v = new Validator();
 
 exports.validateProduct = async (ctx, next) => {
     
@@ -72,6 +73,29 @@ exports.validateCategory = async (ctx, next) => {
     
     try {
         v.validate(body, categorySchema, validationOptions);
+        await next();
+    } catch (error) {
+        if (error instanceof ValidationError) {
+            ctx.body = error;
+            ctx.status = 400;
+        } else {
+            throw error;
+        }
+    }
+}
+
+
+exports.validateOrder = async (ctx, next) => {
+    
+    const validationOptions = {
+        throwError: true,
+        allowUnknownAttributes: false
+    };
+    
+    const body = ctx.request.body;
+    
+    try {
+        v.validate(body, orderSchema, validationOptions);
         await next();
     } catch (error) {
         if (error instanceof ValidationError) {

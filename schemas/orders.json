@@ -1,0 +1,116 @@
+{
+    "$schema":"http://json-schema.org/draft-04/schema#",
+    "definitions": {
+      "orders":{
+          "id":"https://clonepupil-ralphdilemma-3000.codio-box.uk/api/v1/orders",
+          "title":"orders",
+          "description":"An orders in inventory",
+          "type":"object",
+          "properties":{
+            "user_id":{
+              "description":"user Id",
+              "type":"integer"
+            },
+
+            "total_amount":{
+              "description":"total ammount of the order",
+              "type":"integer"
+            },
+
+            "order_date":{
+              "description":"Date of the order",
+              "type":"string"
+            }
+          },
+          "required":["user_id"]
+        },
+
+        "ordersCreated":{
+          "$id": "#ordersCreated",
+          "title": "ordersCreated",
+          "description": "Confirmation of a successful orders update/creation",
+          "type": "object",
+          "properties": {
+              "ID": {
+                  "description": "ID of the new/updated orders record",
+                  "type": "integer"
+              },
+              "updated": {
+                  "description": "Boolean indicator of success",
+                  "type": "boolean"
+              },
+              "link": {
+                  "description": "Path to retrieve orders record",
+                  "type": "string",
+                  "format": "uri"
+              }
+          }
+      },
+
+      "GetAllorders":{
+          "$id": "#GetAllorders",
+          "title": "GetAllorders",
+          "description": "Confirmation of a successful Get request",
+          "type": "object",
+          "properties": {
+              "link": {
+                  "description": "Path to retrieve orders record",
+                  "type": "string",
+                  "format": "uri"
+              },
+
+              "ordersList":{
+                  "description": "show all the orders in database",
+                  "type":"object"
+              }
+          }
+      },
+
+
+      "GetByIdResponse":{
+          "$id": "#Getorders",
+          "title": "Getorders",
+          "description": "Confirmation of a successful Get request",
+          "type": "object",
+          "properties": {
+              "orders_name":{
+                  "description":"unique orders name require",
+                  "type":"string"
+              },
+          
+              "orders_firstname":{
+                  "description":"first name of orders",
+                  "type":"string"
+              },
+
+              "orders_lastname":{
+                  "description":"last name of orders",
+                  "type":"string"
+              },
+
+              "orders_email":{
+                  "description":"orders email",
+                  "type":"string"
+              }
+          }
+      },
+
+      "deleteResponse":{
+          "$id": "#Deleteorders",
+          "title": "Deleteorders",
+          "description": "Confirmation of a successful Delete request",
+          "type": "object",
+          "properties": {
+              "id" :{
+                  "description": "orders id",
+                  "type":"integer"
+              },
+              "deleted":{
+                  "description": "Boolean indicator of success",
+                  "type":"boolean"
+              }
+          }
+      }
+    }
+
+  }

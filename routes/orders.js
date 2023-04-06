@@ -2,6 +2,10 @@ const Router = require('koa-router');
 const bodyParser =require('koa-bodyparser');
 const model = require('../models/orders');
 
+
+// for data validation 
+const {validateOrder} = require('../controllers/validation'); 
+
 const prefix = '/api/v1/orders'; // fic prefix 
 const router = Router({prefix: prefix})
 
@@ -9,10 +13,10 @@ const router = Router({prefix: prefix})
 
 // All endpoints related to orders 
 router.get('/', getAll); // see the user and then show all the orders the user has 
-router.post('/', bodyParser(), createOrder); 
+router.post('/',  bodyParser(), validateOrder, createOrder); 
 
 router.get('/:id([0-9]{1,})', getById); // add auth so that only user can acces its own order 
-router.put('/:id([0-9]{1,})', bodyParser(), updateOrder);  // only user can update their order 
+router.put('/:id([0-9]{1,})', bodyParser(), validateOrder , updateOrder);  // only user can update their order 
 router.del('/:id([0-9]{1,})', deleteOrder);
 
 
