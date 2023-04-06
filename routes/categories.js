@@ -1,6 +1,8 @@
 const Router = require('koa-router');
 const bodyParser =require('koa-bodyparser');
 const model = require('../models/categories');
+const auth = require('../controllers/auth'); // for authentication 
+
 
 // for data validation 
 const {validateCategory} = require('../controllers/validation'); 
@@ -10,11 +12,11 @@ const router = Router({prefix: prefix })
 
 // All endpoints related to categories
 router.get('/', getAll);
-router.post('/', bodyParser(), validateCategory, createCategory);
+router.post('/', auth, bodyParser(), validateCategory, createCategory);
 
-router.get('/:id([0-9]{1,})', getById); 
-router.put('/:id([0-9]{1,})',validateCategory, bodyParser(), updateCategory); 
-router.del('/:id([0-9]{1,})', deleteCategory);
+router.get('/:id([0-9]{1,})', auth, getById); 
+router.put('/:id([0-9]{1,})', auth, bodyParser(), validateCategory, updateCategory); 
+router.del('/:id([0-9]{1,})', auth, deleteCategory);
 
 
 

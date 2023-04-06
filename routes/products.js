@@ -1,6 +1,7 @@
 const Router = require('koa-router');
 const bodyParser =require('koa-bodyparser');
 const model = require('../models/products');
+const auth = require('../controllers/auth'); // for authentication 
 
 // add prefic after products/categorty or /orders 
 // to see how may orders or which category this product fall unders
@@ -13,11 +14,11 @@ const router = Router({prefix: prefix})
 
 // All endpoints related to product
 router.get('/', getAll);
-router.post('/', bodyParser(), validateProduct, createProduct); // add permissions here 
+router.post('/', auth, bodyParser(), validateProduct, createProduct); // add permissions here 
 
-router.get('/:id([0-9]{1,})', getById); 
-router.put('/:id([0-9]{1,})', bodyParser(), validateProduct, updateProduct); 
-router.del('/:id([0-9]{1,})', deleteProduct);
+router.get('/:id([0-9]{1,})', auth, getById); 
+router.put('/:id([0-9]{1,})', auth, bodyParser(), validateProduct, updateProduct); 
+router.del('/:id([0-9]{1,})', auth ,deleteProduct);
 
 
 

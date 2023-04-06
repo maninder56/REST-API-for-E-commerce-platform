@@ -13,7 +13,7 @@ const prefix = '/api/v1/users' ;
 const router = Router({prefix: prefix})
 
 // All endpoints related to product
-router.get('/', getAll); // only admin should be able to access 
+router.get('/', auth, getAll); // only admin should be able to access 
 router.post('/', bodyParser(), validateUser,  createUser); // bodyparser is needed to retrieve data from client 
 
 router.get('/:id([0-9]{1,})' , auth, getById); // user can access only their account
