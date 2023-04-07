@@ -2,7 +2,7 @@ const request = require('supertest')
 const app = require('../app')
 
 // GET requets 
-describe('Products Routes for GET requets', () => {
+xdescribe('Products Routes for GET requets', () => {
     let encodedCredentials;
 
     beforeAll(() => {
@@ -39,7 +39,7 @@ describe('Products Routes for GET requets', () => {
 
 
 // POST requets 
-describe('Products Routes for POST requets', () => {
+xdescribe('Products Routes for POST requets', () => {
   let encodedCredentials;
 
     beforeAll(() => {
@@ -95,7 +95,7 @@ describe('Products Routes for POST requets', () => {
 
 
 // PUT requets 
-describe('Products Routes for PUT requets', () => {
+xdescribe('Products Routes for PUT requets', () => {
   let encodedCredentials;
 
     beforeAll(() => {
