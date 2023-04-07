@@ -2,7 +2,7 @@ const request = require('supertest')
 const app = require('../app')
 
 // GET requets 
-xdescribe('categories Routes for GET requets', () => {
+describe('categories Routes for GET requets', () => {
     let encodedCredentials;
 
     beforeAll(() => {
@@ -40,7 +40,7 @@ xdescribe('categories Routes for GET requets', () => {
 
 // POST requests
 
-xdescribe('categories Routes for POST requets', () => {
+describe('categories Routes for POST requets', () => {
     let encodedCredentials;
   
       beforeAll(() => {
@@ -89,7 +89,7 @@ xdescribe('categories Routes for POST requets', () => {
 
 
 // PUT requets 
-xdescribe('categories Routes for PUT requets', () => {
+describe('categories Routes for PUT requets', () => {
     let encodedCredentials;
   
       beforeAll(() => {
