@@ -141,7 +141,6 @@ describe('Products Routes for PUT requets', () => {
         category_id: 1
       })
       .set('Authorization', `Basic ${encodedCredentials}`);
-      console.log(res.body)
     expect(res.statusCode).toEqual(400)
   })
 

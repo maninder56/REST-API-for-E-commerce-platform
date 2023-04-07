@@ -129,7 +129,6 @@ describe('categories Routes for PUT requets', () => {
           category_description : "new category test",
         })
         .set('Authorization', `Basic ${encodedCredentials}`);
-        console.log(res.body)
       expect(res.statusCode).toEqual(400)
     })
   
