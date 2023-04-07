@@ -2,7 +2,7 @@ const request = require('supertest')
 const app = require('../app')
 
 // GET requets 
-xdescribe('Products Routes for GET requets', () => {
+describe('Products Routes for GET requets', () => {
     let encodedCredentials;
 
     beforeAll(() => {
@@ -39,7 +39,7 @@ xdescribe('Products Routes for GET requets', () => {
 
 
 // POST requets 
-xdescribe('Products Routes for GET requets', () => {
+describe('Products Routes for POST requets', () => {
   let encodedCredentials;
 
     beforeAll(() => {
@@ -90,4 +90,61 @@ xdescribe('Products Routes for GET requets', () => {
   })
 
 });
+
+
+
+
+// PUT requets 
+describe('Products Routes for PUT requets', () => {
+  let encodedCredentials;
+
+    beforeAll(() => {
+        const username = 'user2';
+        const password = '12345';
+    
+        encodedCredentials = Buffer.from(`${username}:${password}`).toString('base64');
+      });
+
+
+  it('should not update any product without correct id', async () => {
+    const res = await request(app.callback())
+      .put('/api/v1/products/200')
+      .send({
+        product_name : "new product",
+        product_description : "new product test",
+        price: 300,
+        category_id: 1
+      }).set('Authorization', `Basic ${encodedCredentials}`);
+    expect(res.statusCode).toEqual(404)
+  })
+
+  it('should update one product with correct id', async () => {
+    const res = await request(app.callback())
+      .put('/api/v1/products/1')
+      .send({
+        product_name : "new product",
+        product_description : "new product test",
+        price: 300,
+        category_id: 1
+      })
+      .set('Authorization', `Basic ${encodedCredentials}`);
+      
+    expect(res.statusCode).toEqual(201)
+  })
+
+  it('should not update product with unvalid data', async () => {
+    const res = await request(app.callback())
+      .put('/api/v1/products/1')
+      .send({
+        product_description : "new product test",
+        price: 300,
+        category_id: 1
+      })
+      .set('Authorization', `Basic ${encodedCredentials}`);
+      console.log(res.body)
+    expect(res.statusCode).toEqual(400)
+  })
+
+});
+
 
