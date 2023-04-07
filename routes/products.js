@@ -29,6 +29,7 @@ async function getAll(ctx){
         byId : `${ctx.protocol}://${ctx.host}${prefix}/id`
     }
     if (products.length){
+        console.log("Products Requetsed ")
         ctx.status = 200;
         ctx.body = {links, products};
     } else{
