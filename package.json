@@ -19,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@koa/cors": "^5.0.0",
-    "axios": "^1.3.5",
+    "axios": "^1.7.4",
     "jsonschema": "^1.4.1",
     "koa": "^2.14.1",
     "koa-bodyparser": "^4.3.0",
